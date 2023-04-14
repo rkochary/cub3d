@@ -2,7 +2,7 @@ NAME 	= cub3d
 
 CC 		= gcc
 
- CFLAGS 	=  -fsanitize=address #-Wall -Wextra -Werror
+ CFLAGS 	=   -g -fsanitize=address #-Wall -Wextra -Werror
 
 SRCS = $(wildcard *.c) $(wildcard */*.c)
 

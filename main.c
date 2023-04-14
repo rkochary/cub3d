@@ -162,6 +162,9 @@ int ft_perror(char *str)
 */
 int	main(int argc, char **argv)
 {
+	t_addres addres;
+
+	addres.cub = malloc(sizeof(t_cub));
 
 	if(argc == 2)
 	{
@@ -172,8 +175,12 @@ int	main(int argc, char **argv)
 		// aaa->mlx = mlx_init();
 		// if (aaa->mlx == NULL)
     	 	//return ft_perror("Failed to initialize mlx");
+		aaa->map = array;
+
+
 		get_textures(array, aaa);
 		get_playfield(array, aaa);
+		check_empty_line(aaa->playfield);
 		if(!check_news(aaa->playfield))
 			exit(1); 
 		if(!check_map_symbols(aaa->playfield))
@@ -197,11 +204,20 @@ int	main(int argc, char **argv)
 			exit(1);
 		 if(!substring_appears_once(aaa->result, "WE"))
 		 	exit(1);
-		if(!validate_colors(aaa->texture))
+		if(!validate_colors(aaa->texture, aaa))
 			exit(1);
-		
+		init_cub(aaa, addres.cub);
+		//printf("%s\n", cub->SO);
+		init_structs(&addres);
+		//addres.data = data_collector(addres.cub);
+		initializer(&addres);
+		init_win(&addres);
+		mlx_hook(addres.game->win, 17, 1L << 0, close_game, &addres);
+		mlx_hook(addres.game->win, 2, 1L << 0, key_manager, &addres);
+		mlx_loop(addres.game->mlx);
 		 //create_imges(aaa);
 		//valid_color();
+
 	}else
 		ft_perror("arg count is not 2\n");
 	return (0);

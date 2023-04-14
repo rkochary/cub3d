@@ -23,6 +23,18 @@ void get_textures(char **map, t_map *m)
     m->texture[i] = NULL;
 }
 
+int is_empty_string(char *str)
+{
+    int i = 0;
+    while(str[i])
+    {
+        if(!ft_isspace(str[i]))
+            return 0;
+        i++;
+    }
+    return 1; 
+}
+
 void get_playfield(char **map, t_map *m)
 {
     int i;
@@ -31,6 +43,11 @@ void get_playfield(char **map, t_map *m)
     m->playfield = (char **)malloc(sizeof(char *) * countStringLength(map) - 6);
     while(map[i])
     {
+        if(is_empty_string(map[i]))
+        {
+            printf("Error: Empty line \n");
+            exit(1);
+        }
         m->playfield[j] = map[i];
         i++;
         j++;
@@ -109,10 +126,27 @@ int check_the_char(char c)
     return 1;
 }
 
+int check_empty_line(char **playfield)
+{
+    int len;
+    int i;
+    len = countStringLength(playfield);
+    i = 0;
+    	while(playfield[i])
+		{
+			if((playfield[i] == NULL || !strcmp(playfield[i], "")) && i != len - 1)
+                return ft_perror("Error: Empty line\n");
+            i++;
+		}
+        return (1);
+}
+
 int	check_cordination(char **map, int x, int y)
 {
 	if (x == 0)
 		return (0);
+    if(ft_strlen(map[x-1]) < y)
+        return (0);
 	if (!map[x - 1] || !map[x - 1][y] || \
 	(map[x - 1][y] != '1' && map[x - 1][y] != '0' && \
 	map[x - 1][y] != 'N' && map[x - 1][y] != 'S' && \
@@ -296,7 +330,7 @@ char	*ft_substr2(char *s, int start, int len)
 	return (ret);
 }
 
-int validate_colors(char **texture)
+int validate_colors(char **texture, t_map * map)
 {
     int count_f = 0;
     int count_c = 0;;
@@ -327,14 +361,20 @@ int validate_colors(char **texture)
         return ft_perror("Error: not valid symbols\n");
     if(!(texture[index_f][2] >= '0' && texture[index_f][2] <= '9'))
         return ft_perror("Error: not valid symbols\n");
-    if(!valid_color(texture[index_c]))
+    if(!valid_color(texture[index_c], map))
     {
         return 0;
     }
-    if(!valid_color(texture[index_f]))
+    map->c[0] = map->term[0];
+    map->c[1] = map->term[1];
+    map->c[2] = map->term[2];
+    if(!valid_color(texture[index_f], map))
     {       
         return 0;
     }
+    map->f[0] = map->term[0];
+    map->f[1] = map->term[1];
+    map->f[2] = map->term[2];
     return (1);
 }
 
@@ -353,7 +393,7 @@ int is_digital_str(char *str)
 }
 
 
-int valid_color(char *str)
+int valid_color(char *str, t_map *map)
 {
     char *nums;
     char **arr;
@@ -378,6 +418,9 @@ int valid_color(char *str)
     }
     if(countStringLength(arr) != 3)
         return ft_perror("Error: not valid symbols\n");
+    map->term[0] = ft_atoi(arr[0]);
+    map->term[1] = ft_atoi(arr[1]);
+    map->term[2] = ft_atoi(arr[2]);
     return (1);
 }
 
