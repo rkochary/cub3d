@@ -179,33 +179,54 @@ void	getter_cub(t_data *data, t_cub cub)
 	data->map = map;
 }
 
-t_data	data_collector(t_cub cub)
+t_data	data_collector(t_cub cub, t_map map)
 {
 	t_data	data;
 
-	data.map = NULL;
+	data.map = map.playfield;
 	data.x = -1;
 	data.y = -1;
-	getter_cub(&data, cub);
+	//getter_cub(&data, cub);
+	printf("x is %d\n", data.pos_x);
+	printf("y is %d\n", data.pos_y);
+	// while(map.playfield[++data.x])
+	// {
+	// 	printf( ">>>%s\n", map.playfield[++data.x]);
+	// 	data.y = -1;
+	// 	while(map.playfield[data.x][data.y])
+	// 	{
+	// 		if(map.playfield[data.x][data.y] == 'E' || \
+	// 		map.playfield[data.x][data.y] == 'N' || \
+	// 		map.playfield[data.x][data.y] == 'S' || \
+	// 		map.playfield[data.x][data.y] == 'W')
+	// 		{
+	// 			data.pos_x = data.x;
+	// 			data.pos_y = data.y;
+	// 		}
+	// 		++data.y;
+	// 	}
+	// }
+	// while (data.map[++(data.y)])
+	// {
+	// 	data.x = -1;
+	// 	while (data.map[++data.y])
+	// 	{
+	// 		if (data.map[data.x][data.y] == 'E' || \
+	// 		data.map[data.x][data.y] == 'N' \
+	// 		|| data.map[data.x][data.y] == 'S' || \
+	// 		data.map[data.x][data.y] == 'W')
+	// 		{
+	// 			data.pos_x = data.x;
+	// 			data.pos_y = data.y;
+	// 			break ;
+	// 		}
+	// 	}
+	// }
+	printf("x is %d\n", data.pos_x);
+	printf("y is %d\n", data.pos_y);
 	return (data);
-	while (data.map[++(data.y)])
-	{
-		data.x = -1;
-		while (data.map[++data.x])
-		{
-			if (data.map[data.x][data.y] == 'E' || \
-			data.map[data.x][data.y] == 'N' \
-			|| data.map[data.x][data.y] == 'S' || \
-			data.map[data.x][data.y] == 'W')
-			{
-				data.pos_x = data.x;
-				data.pos_y = data.y;
-				break ;
-			}
-		}
-	}
-	data.x = -1;
-	data.y = -1;
+	// data.x = -1;
+	// data.y = -1;
 }
 
 int	main(int argc, char **argv)
@@ -265,7 +286,7 @@ int	main(int argc, char **argv)
 		free(aaa->texture);
 		aaa->texture = NULL;
 		init_structs(&addres);
-		addres.data = data_collector(*addres.cub);
+		addres.data = data_collector(*addres.cub, *aaa);
 		//printf("fcvdb");
 		initializer(&addres);
 		init_win(&addres);
@@ -273,8 +294,8 @@ int	main(int argc, char **argv)
 		mlx_hook(addres.game->win, 2, 1L << 0, key_manager, &addres);
 		mlx_loop(addres.game->mlx);
 		 create_imges(aaa);
-		while(1) 
-			;
+		// while(1) 
+		// 	;
 		//valid_color();
 
 	}else
