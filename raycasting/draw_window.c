@@ -6,7 +6,7 @@
 /*   By: rkochary <rkochary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:49:13 by suhovhan          #+#    #+#             */
-/*   Updated: 2023/04/14 19:48:49 by rkochary         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:36:58 by rkochary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	initializer(t_addres *address)
 	if (address->game->mlx == NULL || address->game->win == NULL)
 		close_game(address);
 	if (address->game->no == NULL || address->game->so == NULL)
+	{
+		printf("Razmik\n");
 		close_game(address);
+	}
 	if (address->game->we == NULL || address->game->ea == NULL)
 		close_game(address);
 }

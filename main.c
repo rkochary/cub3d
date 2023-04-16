@@ -160,6 +160,54 @@ int ft_perror(char *str)
 		return (0);
 	}
 */
+
+void	getter_cub(t_data *data, t_cub cub)
+{
+	int		i;
+	char	**map;
+
+	i = -1;
+	while (cub.map[++i])
+		;
+	map = (char **)malloc(sizeof(char *) * (i + 2));
+	if (!map)
+		return ;
+	i = -1;
+	while (cub.map[++i])
+		map[i] = ft_strdup(cub.map[i]);
+	map[i] = 0;
+	data->map = map;
+}
+
+t_data	data_collector(t_cub cub)
+{
+	t_data	data;
+
+	data.map = NULL;
+	data.x = -1;
+	data.y = -1;
+	getter_cub(&data, cub);
+	return (data);
+	while (data.map[++(data.y)])
+	{
+		data.x = -1;
+		while (data.map[++data.x])
+		{
+			if (data.map[data.x][data.y] == 'E' || \
+			data.map[data.x][data.y] == 'N' \
+			|| data.map[data.x][data.y] == 'S' || \
+			data.map[data.x][data.y] == 'W')
+			{
+				data.pos_x = data.x;
+				data.pos_y = data.y;
+				break ;
+			}
+		}
+	}
+	data.x = -1;
+	data.y = -1;
+}
+
 int	main(int argc, char **argv)
 {
 	t_addres addres;
@@ -207,9 +255,12 @@ int	main(int argc, char **argv)
 		if(!validate_colors(aaa->texture, aaa))
 			exit(1);
 		init_cub(aaa, addres.cub);
+		printf("%s\n",addres.cub->NO);
+		//addres.data.map = aaa->map;
 		//printf("%s\n", cub->SO);
 		init_structs(&addres);
-		//addres.data = data_collector(addres.cub);
+		addres.data = data_collector(*addres.cub);
+		//printf("fcvdb");
 		initializer(&addres);
 		init_win(&addres);
 		mlx_hook(addres.game->win, 17, 1L << 0, close_game, &addres);

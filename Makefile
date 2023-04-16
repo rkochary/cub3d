@@ -2,7 +2,7 @@ NAME 	= cub3d
 
 CC 		= gcc
 
- CFLAGS 	=   -g -fsanitize=address #-Wall -Wextra -Werror
+ CFLAGS 	= -ggdb3 # -g -fsanitize=address #-Wall -Wextra -Werror
 
 SRCS = $(wildcard *.c) $(wildcard */*.c)
 
@@ -11,7 +11,7 @@ all: $(NAME)
 OBJS	= $(SRCS:.c=.o)
 
 $(NAME) : $(OBJS)
-	@$(CC) -fsanitize=address -g -lmlx -framework OpenGL -framework AppKit  $^ -o $@
+	@$(CC) -lmlx -framework OpenGL -framework AppKit  $^ -o $@
 %.o:%.c
 	@$(CC) $(CFLAGS) -c $^ -o $@
 
