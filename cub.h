@@ -243,8 +243,8 @@ void	move_down(t_addres *address);
 void	print_close(t_addres *address, char *str);
 int	close_game(t_addres *address);
 void	print_error(t_addres *address, char *err, int flag);
-
-
+void	free_cub(t_cub map);
+void	free_mtx(char **mtx);
 
 
 

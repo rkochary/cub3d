@@ -284,6 +284,11 @@ int chgitem(char **texture, t_map *map)
         }
         map->result[i] = arr[0];
         map->result2[i] = arr[1];
+        if(!(!strcmp(arr[0], "NO" ) || !strcmp(arr[0], "SO") || !strcmp(arr[0], "EA") || !strcmp(arr[0],  "WE") ))
+            free_mtx(arr);
+        else{
+            free(arr);
+        }
         i++;
     }
     map->result[i] = NULL;
@@ -406,14 +411,19 @@ int valid_color(char *str, t_map *map)
     }
     nums = ft_substr2(str,i,ft_strlen(str) - 2);
     arr = ft_split(nums,',');
+    free(nums);
     i = 0;
+    char * p= NULL;
+
     while(arr[i])
     {
+        p = arr[i];
         arr[i] = ft_strtrim(arr[i]," \r\v\f\t");
         if(!is_digital_str(arr[i]))
             return ft_perror("Error: not valid symbols\n");
         if(ft_atoi(arr[i]) < 0 || ft_atoi(arr[i]) > 255)
             return ft_perror("Error: not valid symbols\n");
+        free(p);
         i++;
     }
     if(countStringLength(arr) != 3)
@@ -421,6 +431,8 @@ int valid_color(char *str, t_map *map)
     map->term[0] = ft_atoi(arr[0]);
     map->term[1] = ft_atoi(arr[1]);
     map->term[2] = ft_atoi(arr[2]);
+    free_mtx(arr);
+
     return (1);
 }
 

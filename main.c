@@ -255,9 +255,15 @@ int	main(int argc, char **argv)
 		if(!validate_colors(aaa->texture, aaa))
 			exit(1);
 		init_cub(aaa, addres.cub);
-		printf("%s\n",addres.cub->NO);
-		//addres.data.map = aaa->map;
-		//printf("%s\n", cub->SO);
+		//free(aaa);
+		int i = 0;
+		while(i < 6)
+		{
+			free(aaa->texture[i]);
+			i++;
+		}
+		free(aaa->texture);
+		aaa->texture = NULL;
 		init_structs(&addres);
 		addres.data = data_collector(*addres.cub);
 		//printf("fcvdb");
@@ -266,7 +272,9 @@ int	main(int argc, char **argv)
 		mlx_hook(addres.game->win, 17, 1L << 0, close_game, &addres);
 		mlx_hook(addres.game->win, 2, 1L << 0, key_manager, &addres);
 		mlx_loop(addres.game->mlx);
-		 //create_imges(aaa);
+		 create_imges(aaa);
+		while(1) 
+			;
 		//valid_color();
 
 	}else
