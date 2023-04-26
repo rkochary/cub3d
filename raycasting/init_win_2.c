@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_win_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkochary <rkochary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aremkrtc <aremkrtc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:49:28 by suhovhan          #+#    #+#             */
-/*   Updated: 2023/04/14 19:31:54 by rkochary         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:52:46 by aremkrtc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,12 @@ int	draw_walls(t_addres *address, char *dest, char *dest_2, int texx)
 	address->rcasting->lineheight / 2) * step;
 	while (i < address->rcasting->drawend)
 	{
-		texy = (int)texpos & address->img[n].width;
+		texy = (int)texpos & address->img[n].height;
 		texpos += step;
 		dest = address->img[0].img + (i * address->img[0].size_line + \
 		address->game->index * (address->img[0].bpp / 8));
-		dest_2 = address->img[n].img + ((int)texpos * \
-		address->img[n].size_line + texx * (address->img[n].bpp / 8));
+		dest_2 = address->img[n].img + (texy * address->img[n].size_line + \
+		texx * (address->img[n].bpp / 8));
 		*(int *)dest = *(int *)dest_2;
 		i++;
 	}

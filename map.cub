@@ -8,16 +8,16 @@
 
 
 
-    EA                        photos_2022_5_17_fst_brick-wall-red-old-_1_.xpm
-WE      photos_2022_5_17_fst_brick-wall-red-old-_1_.xpm
+    EA                        ea.xpm
+WE      we.xpm
 
 
 
-F       153, 153, 200
+F      153, 153, 200
 
 
-NO     photos_2022_5_17_fst_brick-wall-red-old-_1_.xpm
-SO      photos_2022_5_17_fst_brick-wall-red-old-_1_.xpm                   
+NO     no.xpm
+SO      so.xpm                   
 C 0, 250, 255,
 
         11111111111111111111111111

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_win.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rkochary <rkochary@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aremkrtc <aremkrtc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 20:52:36 by suhovhan          #+#    #+#             */
-/*   Updated: 2023/04/16 14:56:08 by rkochary         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:37:10 by aremkrtc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	find_pos_player(t_addres *address)
 	int	j;
 
 	i = 0;
-	// printf(">>%s<<\n", address->data.map[i]);
 	while (address->data.map[i])
 	{
 		j = 0;
@@ -113,6 +112,8 @@ void	init_win(t_addres *address)
 
 	i = 0;
 	find_pos_player(address);
+	free(address->img[0].ptr);
+	free(address->img[0].img);
 	address->img[0].ptr = mlx_new_image(address->game->mlx, WIDTH, HEIGHT);
 	address->img[0].img = mlx_get_data_addr(address->img[0].ptr, \
 	&address->img[0].bpp, &address->img[0].size_line, &address->img[0].endian);
